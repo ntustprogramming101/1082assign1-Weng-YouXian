@@ -1,3 +1,6 @@
+PImage bgImg,groundhogImg,lifeImg,robotImg,soilImg,soldierImg;
+int grid=80;
+int gressH=15;
 int lifeW=51;
 int groundhogW=80;
 int soldierX,soldierY,robotX,robotY;
@@ -6,19 +9,18 @@ int move=0;
 
 void setup() {
 	size(640, 480, P2D);
-  bgImg=loadImage("bg.jpg");
-  groundhogImg=loadImage("groundhog.png");
-  lifeImg=loadImage("life.png");
-  robotImg=loadImage("robot.png");
-  soilImg=loadImage("soil.png");
+  bgImg=loadImage("img/bg.jpg");
+  groundhogImg=loadImage("img/groundhog.png");
+  lifeImg=loadImage("img/life.png");
+  soilImg=loadImage("img/soil.png");
   //soldierEmerge
-  soldierImg=loadImage("soldier.png");
+  soldierImg=loadImage("img/soldier.png");
   soldierX=floor(random(0,640));
   soldierY=(floor(random(1,4))+2)*grid;
   //robotEmerge
   robotX=(floor(random(0,5))+2)*grid;
   robotY=(floor(random(1,4))+2)*grid;
-  robotImg=loadImage("robot.png");
+  robotImg=loadImage("img/robot.png");
 }
 
 void draw() {
