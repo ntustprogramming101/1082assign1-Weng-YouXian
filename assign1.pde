@@ -64,7 +64,6 @@ void draw() {
   lx2=laserSpeed2+robotX+25; 
   if (lx1>robotX-grid*2){ //bugSolved#5
     laserSpeed1-=2; //bugSolved#6
-    println(lx1,lx2);
     if (lx1<robotX-laserWeight+25){
       laserSpeed2-=2;
     }
