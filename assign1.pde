@@ -1,11 +1,17 @@
 PImage bgImg,groundhogImg,lifeImg,robotImg,soilImg,soldierImg;
-int grid=80;
-int gressH=15;
-int lifeW=51;
-int groundhogW=80;
-int soldierX,soldierY,robotX,robotY;
-int soldierW=80;
-int move=0;
+float grid=80;
+float gressH=15;
+float lifeW=51;
+float groundhogW=80;
+float soldierX,soldierY,robotX,robotY;
+float soldierW=80;
+//int move=0;
+//int lx1=25,lx2=25;
+float lx1,lx2,laserSpeed1,laserSpeed2;
+float laserWeight=40;
+
+
+
 
 void setup() {
 	size(640, 480, P2D);
@@ -15,12 +21,15 @@ void setup() {
   soilImg=loadImage("img/soil.png");
   //soldierEmerge
   soldierImg=loadImage("img/soldier.png");
-  soldierX=floor(random(0,640));
-  soldierY=(floor(random(1,4))+2)*grid;
+  soldierX=-soldierW; //bugSolved#4
+  soldierY=(floor(random(0,4))+2)*grid; //bugSolved#1
   //robotEmerge
-  robotX=(floor(random(0,5))+2)*grid;
-  robotY=(floor(random(1,4))+2)*grid;
+  robotX=(floor(random(0,6))+2)*grid; //bugSolved#2
+  robotY=(floor(random(0,4))+2)*grid; //bugSolved#3
   robotImg=loadImage("img/robot.png");
+
+  laserSpeed2=0;
+
 }
 
 void draw() {
@@ -50,13 +59,20 @@ void draw() {
     soldierX=-soldierW;
   }
   //robot&Laser
-  if (move>-(grid*2+25)){
-    move--;
+  image(robotImg,robotX,robotY);
+  lx1=laserSpeed1+robotX+25;
+  lx2=laserSpeed2+robotX+25; 
+  if (lx1>robotX-grid*2){ //bugSolved#5
+    laserSpeed1-=2; //bugSolved#6
+    println(lx1,lx2);
+    if (lx1<robotX-laserWeight+25){
+      laserSpeed2-=2;
+    }
   }else{
-    move=0;
+    laserSpeed1=0;
+    laserSpeed2=0;
   }
   stroke(255,0,0);
   strokeWeight(10);
-  line(25+robotX+move,37+robotY,35+robotX+move,37+robotY);
-  image(robotImg,robotX,robotY);
+  line(lx1,37+robotY,lx2,37+robotY);
 }
